@@ -2,7 +2,7 @@
 
 Nuevo diseño de la tienda de [Universal Driveshafts](https://dev.udshafts.com) (repuestos de cardanes y cardanes completos, Odessa, Florida). Empieza por el **home**. Es un diseño nuevo sobre **el mismo backend Laravel**: los mismos controladores, servicios, carrito, checkout con Stripe, envíos, cuentas mayoristas y asistente. Solo cambia la capa de presentación (Blade, CSS y JS).
 
-**Vista previa:** https://federico-schwindt.github.io/universal-driveshafts-re-design-website/
+**Vista previa:** https://federico-schwindt.github.io/Universal-Driveshafts-re-design-website/
 
 La vista previa es una exportación estática del home renderizado por la app real. El buscador por vehículo y la búsqueda usan el catálogo en vivo de dev.udshafts.com. El resto de los enlaces abren la tienda actual, y "Agregar al carrito" muestra un aviso, porque la vista previa no tiene servidor.
 
@@ -30,6 +30,8 @@ Todo con `__()` para las traducciones existentes (en, es, fr, zh, ja). El SEO es
 Una sola hoja de estilos de unos 50 KB (unos 10 KB comprimida), unos 16 KB de JavaScript sin dependencias, fotos en AVIF y WebP con tamaños para celular y escritorio, y fuentes propias con `font-display: swap`.
 
 ## Cómo instalarlo en la app Laravel
+
+Ya está listo como PR en borrador en la app: [Federico-Schwindt/UniversalDriveshaftsLARAVEL#2](https://github.com/Federico-Schwindt/UniversalDriveshaftsLARAVEL/pull/2) (rama `redesign/home`). También se puede copiar a mano:
 
 La carpeta `laravel/` tiene las mismas rutas que la app. Copiá su contenido sobre la raíz del proyecto:
 
