@@ -13,7 +13,7 @@ import argparse, os, re, shutil, urllib.request
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--app', default='http://127.0.0.1:8000')
-ap.add_argument('--laravel', default='/home/user/federico-schwindt/universaldriveshaftslaravel')
+ap.add_argument('--laravel', default='/home/user/universaldriveshaftslaravel')
 ap.add_argument('--store', default='https://dev.udshafts.com')
 ap.add_argument('--out', default=os.path.join(os.path.dirname(__file__), '..', 'preview'))
 a = ap.parse_args()
@@ -27,7 +27,7 @@ for base in ('http://localhost:8000', 'http://127.0.0.1:8000', a.app):
     html = html.replace(base + '/', '/').replace(base + '"', '/"').replace(base + '?', '/?')
 
 # 2) the redesign's own assets become relative files of the preview
-LOCAL = ('/css/store.css', '/js/store.js', '/js/cart-drawer.js', '/fonts/', '/img/store/', '/img/uds-logo.webp', '/favicon', '/apple-touch-icon.png', '/img/og-default.jpg')
+LOCAL = ('/css/store.css', '/css/st-shell.css', '/js/store.js', '/js/cart-drawer.js', '/fonts/', '/img/store/', '/img/uds-logo.webp', '/favicon', '/apple-touch-icon.png', '/img/og-default.jpg')
 def rel(m):
     attr, url = m.group(1), m.group(2)
     if url.startswith(LOCAL):
@@ -65,9 +65,12 @@ def cp(rel_path):
         shutil.copytree(src, dst, dirs_exist_ok=True)
     elif os.path.exists(src):
         shutil.copy2(src, dst)
-for f in ('css/store.css', 'js/store.js', 'js/cart-drawer.js', 'fonts/store', 'fonts/hankengrotesk-var.woff2', 'fonts/ibmplexmono-500.woff2',
+for f in ('css/store.css', 'css/st-shell.css', 'js/store.js', 'js/cart-drawer.js', 'fonts/store', 'fonts/hankengrotesk-var.woff2', 'fonts/ibmplexmono-500.woff2',
           'fonts/ibmplexmono-600.woff2', 'img/store', 'img/uds-logo.webp', 'favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'img/og-default.jpg'):
     cp(f)
+for extra in ('css/st-shell.css',):
+    path = os.path.join(out, extra)
+    open(path, 'w').write(open(path).read().replace("url('/fonts/", "url('../fonts/"))
 css = os.path.join(out, 'css/store.css')
 s = open(css).read().replace("url('/fonts/", "url('../fonts/")
 s += '\n.st-preview { background: #fff4d6; color: #5a4300; text-align: center; font-size: .82rem; padding: 7px 16px; border-bottom: 1px solid #f1d58a; }\n'
